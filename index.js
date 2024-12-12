@@ -7,6 +7,8 @@ import { readdir, readFile, stat } from 'fs/promises';
 import { join } from 'path';
 
 const openai = new OpenAI()
+const basepath = process.argv[2]
+const limit = process.argv[3] || 20
 
 
 const system = `
@@ -82,7 +84,7 @@ const go = async (basepath, limit) => {
         const suggestions = await getSuggestion(code)
     
         const output = [
-            file.replace('/Users/andrewhartnett/Sites/kvcore-api/', ''),
+            file.replace(basepath, ''),
             suggestions.choices[0].message.content
         ].join("\n")
     
@@ -97,8 +99,7 @@ const go = async (basepath, limit) => {
     console.log(totalCost)
 }
 
-const basepath = process.argv[2]
-const limit = process.argv[3] || 20
+
 
 go(basepath, limit)
 
