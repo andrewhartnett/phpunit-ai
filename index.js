@@ -62,7 +62,7 @@ const getCost = (usage) => {
     const outputTokens = usage.completion_tokens
 
     const costInput = inputTokens * (0.15 / 1000000)
-    const costOutput = inputTokens * (0.6 / 1000000)
+    const costOutput = outputTokens * (0.6 / 1000000)
 
     return costInput + costOutput
 
